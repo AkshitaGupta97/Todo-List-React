@@ -1,5 +1,4 @@
 
-import { useContext } from 'react';
 import './App.css'
 import AddTodo from './Component/AddTodos/AddTodo'
 import TodoList from './Component/TodoList/TodoList'
@@ -14,8 +13,10 @@ function App() {
     <TodoContext.Provider value={{list, setList}}>
       <AddTodo updateList={(todo) => setList([
         ...list, {id: list.length + 1, 
-        todoData: todo, finished: false}])} />
-      <TodoList list={list} updateList={setList} />
+        todoData: todo, finished: false}])} 
+      />
+
+      <TodoList />
 
     </TodoContext.Provider>
   )

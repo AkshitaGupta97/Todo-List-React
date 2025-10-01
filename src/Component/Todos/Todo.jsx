@@ -1,6 +1,6 @@
 import { useState } from "react"
 
-function Todo({todoData, isFinished, changeFinished}) {
+function Todo({todoData, isFinished, changeFinished, onDelete}) {
   const [finish, setFinish] = useState(isFinished)
   return (
     <div>
@@ -12,7 +12,7 @@ function Todo({todoData, isFinished, changeFinished}) {
         />
         {todoData}
         <button>Edit</button>
-        <button>Delete</button>
+        <button onClick={onDelete}>Delete</button>
     </div>
   )
 }

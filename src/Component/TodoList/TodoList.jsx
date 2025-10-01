@@ -22,6 +22,10 @@ function TodoList() {
                         });
                         setList(updatedList)
                     }}
+                    onDelete={() => {
+                        const updatedList = list.filter(td => td.id !== todo.id)
+                        setList(updatedList)
+                    }}
                 />)
             }
         </div>
