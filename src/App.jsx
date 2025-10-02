@@ -5,6 +5,7 @@ import TodoList from './Component/TodoList/TodoList'
 import TodoContext from './Component/Context/TodoContext';
 import { useReducer, useState } from 'react';
 import todoReducer from './Component/reducers/todoReducer';
+import TodoDispatchContext from './Component/Context/TodoDispatchContext';
 
 function App() {
   /*const [list, setList] = useState([
@@ -17,14 +18,14 @@ function App() {
 
 
   return (
-    <TodoContext.Provider value={{list}}>
-      <AddTodo updateList={(todo) => {
-        dispatch({type: 'add_Todo', todoText: todo})
-      }} 
-      />
+    <TodoContext.Provider value={{ list }}>
+      <TodoDispatchContext.Provider value={{dispatch}}>  
 
-      <TodoList />
+        <AddTodo />
 
+        <TodoList />
+
+      </TodoDispatchContext.Provider>
     </TodoContext.Provider>
   )
 }
@@ -40,3 +41,11 @@ export default App
       />
  */
 
+/*
+<AddTodo updateList={(todo) => {
+      dispatch({ type: 'add_Todo', payload: { todoText: todo } })
+    }}
+    />
+ */
+
+    // {{dispatch}} we are doing in this way because i want to pass an object

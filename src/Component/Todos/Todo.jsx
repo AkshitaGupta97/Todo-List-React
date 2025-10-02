@@ -18,6 +18,7 @@ function Todo({todoData, isFinished, changeFinished, onDelete, onEdit}) {
 
         {(editing) ? <input type="text" value={editText} 
         onChange={e => setEditText(e.target.value)}/> : <span>{todoData}</span> }
+        
         <button 
         onClick={() => {
           setEditing(!editing)

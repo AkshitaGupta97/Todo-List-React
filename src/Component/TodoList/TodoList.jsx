@@ -2,36 +2,46 @@
 import { useContext } from 'react';
 import Todo from '../Todos/Todo';
 import TodoContext from '../Context/TodoContext';
+import TodoDispatchContext from '../Context/TodoDispatchContext';
 
 function TodoList() {
     const { list, setList } = useContext(TodoContext)
+    const { dispatch } = useContext(TodoDispatchContext)
 
     function onFinished(todo, isFinished) {
-        const updatedList = list.map(td => {
-            if (td.id === todo.id) {
-                todo.finished = isFinished;
-            }
-            return td;
-        });
-        setList(updatedList)
+        dispatch({ type: 'finish_Todo', payload: { todo, isFinished } })
     }
 
     function onDelete(todo) {
-        const updatedList = list.filter(td => td.id !== todo.id)
-        setList(updatedList)
+        dispatch({ type: 'delete_Todo', payload: { todo } })
     }
 
     function onEdit(todo, todoText) {
-        const updatedList = list.map(td => {
-            if (td.id === todo.id) {
-                todo.todoText = todoText;
-            }
-            return td;
-        });
-        setList(updatedList)
+        dispatch({ type: 'edit_Todo', payload: { todo, todoText } })
     }
-    
+
     return (
+        <div>
+            {
+                list.length > 0 && list.map(todo =>
+                    <Todo key={todo.id}
+                        id={todo.id} todoData={todo.todoData}
+                        isFinished={todo.finished}
+                        changeFinished={(isFinished) => onFinished(todo, isFinished)}
+                        onDelete={() => onDelete(todo)}
+                        onEdit={(todoText) => onEdit(todo, todoText)}
+                    />)
+            }
+        </div>
+    )
+}
+
+export default TodoList
+
+// code before using reducers
+
+/*
+ return (
         <div>
             {
                 list.length > 0 && list.map(todo =>
@@ -64,6 +74,5 @@ function TodoList() {
             }
         </div>
     )
-}
+ */
 
-export default TodoList
